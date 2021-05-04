@@ -139,7 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="calculate.cpp" />
+    <ClCompile Include="controll.cpp" />
+    <ClCompile Include="hmi.cpp" />
     <ClCompile Include="material.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="calculate.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
