@@ -15,13 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="material.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="calculate.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="controll.cpp">
+    <ClCompile Include="control.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="hmi.cpp">
@@ -30,6 +27,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calculate.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="hmi.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="contorl.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
