@@ -94,7 +94,12 @@ int goTo(char& buchstabe)
 
 void CLS()
 {
-	system("ctl");
+	system("cls");
+}
+
+void pause()
+{
+	system("pause");
 }
 
 void ClsAndHello()
@@ -153,7 +158,7 @@ void GetStringFromUser(int* strinStatus, int& ganzzahl, double& kommazahl, char&
 		// iWant (Datentyp x)
 		// ------------------
 		switch (iWant) {
-		case 0:			//  0 = Ganzzahl
+		case 0:			//  0 = Alles
 			*strinStatus = *strinStatus;
 			break;
 		case 10:		// 10 = Zahl allgemein
