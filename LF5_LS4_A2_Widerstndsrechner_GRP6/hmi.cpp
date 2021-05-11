@@ -94,7 +94,7 @@ int goTo(char& buchstabe)
 
 void CLS()
 {
-	system("ctl");
+	system("cls");
 }
 
 void ClsAndHello()
