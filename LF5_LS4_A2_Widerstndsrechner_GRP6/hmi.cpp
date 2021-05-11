@@ -20,11 +20,11 @@ using namespace std;		// Setze Standard Bibliothek
 
 void HelloUser() 
 {
-	cout << "           Willkommen im Widerstandrechner 2021" << endl;
-	cout << "===============================================================" << endl << endl;
-	cout << "   MenüNavi || 0 -> Hauptmenü || 55 -> Zurück || 100 -> EXIT ||" << endl;
-	cout << "EingabeNavi ||  a -> Eingabe abbrechen & zurück in das Menü  ||" << endl;
-	cout << "===============================================================" << endl << endl;
+	cout << "                 Willkommen im Widerstandrechner 2021" << endl;
+	cout << "======================================================================" << endl << endl;
+	cout << "       Navi ||  h -> Hauptmenü    ||    b -> Zurück    ||" << endl;
+	cout << "       Navi ||  a -> Eingabe abbrechen & zurück in das letztw Menü  ||" << endl;
+	cout << "======================================================================" << endl << endl;
 }
 
 int menMainMenu()
@@ -67,12 +67,16 @@ int goTo(char& buchstabe)
 {
 	int goTo = 0;
 
+	if (buchstabe == 'a')	// Zurück in das letzte Menü
+	{
+		goTo = -1000;
+	}
 	if (buchstabe == 'b')	// Einen Schritt zurück
 	{
 		goTo = -1;
 	}
 
-	if (buchstabe == 'v')	// Einen Schriit vor
+	if (buchstabe == 'n')	// Einen Schriit vor
 	{
 		goTo = +1;
 	}
