@@ -27,35 +27,23 @@ void HelloUser()
 	cout << "======================================================================" << endl << endl;
 }
 
-int menMainMenu()
+void menMainMenu()
 {
-	int input = 0;
-
 	cout << " 1 | RTh eines genormten Widerstandes (R20) berechnen " << endl;
 	cout << " 2 | RTh einer Leitung berchenen" << endl;
-
-	cout << endl;
-	cout << "Erwarte Eingabe: ";
-	cin >> input;
-	cout << endl;
-
-	return input;
 }
 
-int menPickMaterial(string* arr[5])
+void menPickMaterial(string* arr[5])
 {
-	int input = 0;
-
-	cout << "Bitte eines der folgenden Materialien wählen:" << endl;
+	cout << "Bitte eines der folgenden Materialien wählen: " << endl;
 	for (int i = 0; i < 5; i++)
 	{
 		cout << setfill(' ');
 		cout << setw(2) << i + 1 << " | " << arr[i];
 	}
-	return input;
 }
 
-int menSubMenu()
+void menSubMenu()
 {
 
 }
@@ -90,6 +78,8 @@ int goTo(char& buchstabe)
 	{
 		goTo = 1000;
 	}
+
+	return goTo;
 }
 
 void CLS()
@@ -115,6 +105,7 @@ void GetStringFromUser(int* strinStatus, int& ganzzahl, double& kommazahl, char&
 	// 10 = Zahl allgemein
 	// 11 = Ganzzahl
 	// 12 = Gleitpunktzahl
+	// 15 = Ganzzahl & Buchstabe
 	// 20 = Buchstabe
 
 	int strinLength = 0;
@@ -171,6 +162,10 @@ void GetStringFromUser(int* strinStatus, int& ganzzahl, double& kommazahl, char&
 			break;
 		case 12:		// 12 = Gleitkommazahl
 			if (*strinStatus != 2)
+				*strinStatus = 0;
+			break;
+		case 15:		// 15 = Ganzzahl & Buchstabe
+			if ((*strinStatus != 1) && (*strinStatus != 5))
 				*strinStatus = 0;
 			break;
 		case 20:		// 20 = Buchstabe

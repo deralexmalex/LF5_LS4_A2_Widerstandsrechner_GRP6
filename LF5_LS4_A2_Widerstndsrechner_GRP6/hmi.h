@@ -1,7 +1,7 @@
 #ifndef hmi.h
 
 void HelloUser();
-int menMainMenu();
+void menMainMenu();
 void printResults(double result1, double result2);
 void ClsAndHello();
 void CLS();
