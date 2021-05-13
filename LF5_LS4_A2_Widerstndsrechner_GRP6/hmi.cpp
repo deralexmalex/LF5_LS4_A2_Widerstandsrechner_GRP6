@@ -33,13 +33,13 @@ void menMainMenu()
 	cout << " 2 | RTh einer Leitung berchenen" << endl;
 }
 
-void menPickMaterial(string* arr[5])
+void menPickMaterial(const char *NameOfMaterial[])
 {
 	cout << "Bitte eines der folgenden Materialien wählen: " << endl;
 	for (int i = 0; i < 5; i++)
 	{
 		cout << setfill(' ');
-		cout << setw(2) << i + 1 << " | " << arr[i];
+		cout << setw(2) << i + 1 << " | " << NameOfMaterial[i];
 	}
 }
 
@@ -98,7 +98,7 @@ void ClsAndHello()
 	HelloUser();
 }
 
-void GetStringFromUser(int* strinStatus, int& ganzzahl, double& kommazahl, char& buchstabe, int iWant)
+void GetStringFromUser(int iWant, int* strinStatus, int& ganzzahl, double& kommazahl, char& buchstabe)
 {
 	// iWant Legende
 	//  0 = Alle Typen
