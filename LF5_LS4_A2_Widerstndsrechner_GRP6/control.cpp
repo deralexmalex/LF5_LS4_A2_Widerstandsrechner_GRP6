@@ -20,16 +20,11 @@
 #include "control.h"
 #include "calculate.h"
 #include "hmi.h"
+#include "material.h"
 
 // Standard libarys
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <sstream>
 #include <locale>
 
-//functions
-int mainmenu();
 
 
 using namespace std;		// Setze Standard Bibliothek
@@ -40,8 +35,12 @@ int main()
 {
 	locale::global(locale("German_germany"));
 
-	char choose;
+	char choose = 0;
 
+	ClsAndHello();
+	menPickMaterial();
+
+/*
 	do
 	{
 		choose = 0;
@@ -77,4 +76,8 @@ int mainmenu()										// Hauptmenü
 			break;
 		}
 	} while (true);
+
+*/
+
+	return 0;
 }

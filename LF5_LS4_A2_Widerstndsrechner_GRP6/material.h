@@ -1,24 +1,12 @@
+// material.h
 #pragma once
-#ifndef MATERIAL_H
-#define MATERIAL_H
+const char* NameOfMaterial[];
+int ArrMaterialien(void);
 
-char *PointerNameOfMaterial;
-//double MaterialProperties[4][4];
-double SpecificResistanceOfMaterial[];
-double ElectricalConductivityOfMaterial[];
-double TemperatureCoefficientA[];
-double TemperatureCoefficientB[];
+double SpecificResistanceOfMaterial[4] = { 0.0165, 0.0178, 0.023, 0.0286 };
 
-#endif // !MATERIAL_H
+double ElectricalConductivityOfMaterial[4] = { 60.6, 56.2, 43.5, 35.0 };
 
+double TemperatureCoefficientA[4] = { 0.0038, 0.0039, 0.0039, 0.0037 };
 
-
-
-/*
-char* NameOfMaterial[4];
-double MaterialProperties[4][4];
-double SpecificResistanceOfMaterial[4];
-double ElectricalConductivityOfMaterial[4];
-double TemperatureCoefficientA[4];
-double TemperatureCoefficientB[4];
-*/
+double TemperatureCoefficientB[4] = { 0.7, 0.6, 0.5, 1.3 };

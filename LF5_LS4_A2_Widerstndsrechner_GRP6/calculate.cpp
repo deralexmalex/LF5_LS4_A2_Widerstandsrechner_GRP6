@@ -11,12 +11,12 @@
 //=================================================================================================================//
 
 
-double CalcResistorR20RTh(double R20, double IstTempr, double(* Tabelle)[2], int Element)
+double CalcResistorR20RTh(double R20, double IstTempr, double SpecificResistance, double ElectricalConductivity, double TemperatureCoefficientA, double TemperatureCoefficientB,int Element)
 {
 	double R20RTh = 0;						// Rückgabewert Temperaturabhängiger Widerstand
 	double DeltaTempr = IstTempr - 20;		// DeltaTemperatur vorbereiten
 
-	//R20RTh = R20 * (1 + Tabelle[Element][3] * DeltaTempr + Tabelle[Element][4] * pow(DeltaTempr, 2));
+	R20RTh = R20 * (1 + Tabelle[Element][3] * DeltaTempr + Tabelle[Element][4] * pow(DeltaTempr, 2));
 
 	return R20RTh;
 }

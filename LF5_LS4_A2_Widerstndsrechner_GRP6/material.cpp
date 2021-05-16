@@ -1,36 +1,15 @@
-/*
-**
-
-material.cpp
-Alles was mit den Materialeigenschaften zu tun
-hat wird in dieser Datei zusammnegefasst.
-
-
-
-/
-GetMaterialConf
-BuildMaterialArray
-PutLog
-*/
-
+// material.cpp 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <cstdlib>
-#include <locale>
-#include <vector>
+#include <iomanip> 
 
 #include "material.h"
 
-
-
 using namespace std;
 
-string NameOfMaterial[4] = { "Silber", "Kupfer", "Gold", "Aluminium" };
-
-string *PointerNameOfMaterial =& NameOfMaterial[0];
-
-double MaterialProperties[4][4] =
+const double MaterialProperties[4][4] =
 {
     {0.0165, 60.6, 0.0038, 0.7},
     {0.0178, 56.2, 0.0039,0.6},
@@ -38,10 +17,25 @@ double MaterialProperties[4][4] =
     {0.0286, 35.0, 0.0037, 1.3}
 };
 
-double SpecificResistanceOfMaterial[4] = { 0.0165, 0.0178, 0.023, 0.0286 };
 
-double ElectricalConductivityOfMaterial[4] = { 60.6, 56.2, 43.5, 35.0 };
 
-double TemperatureCoefficientA[4] = { 0.0038, 0.0039, 0.0039, 0.0037 };
+// Materialnamen
+// -------------
+const char* NameOfMaterial[] = { "Silber", "Kupfer", "Gold", "Aluminium" };
 
-double TemperatureCoefficientB[4] = { 0.7, 0.6, 0.5, 1.3 };
+int ArrMaterialien()
+{
+    int counter, i;
+
+    for (counter = 0; NameOfMaterial[counter] != NULL; counter++); // Abzählen wieviele Elemente im Array sind
+
+    // Die Namen der Elemente auflisten (wird hier ausgeführt, d Übergabe des Arrays an HMI zu aufwendig)
+    for (i = 0; i < counter; i++)
+    {
+        cout << setfill(' ');
+        cout << setw(2) << i + 1;
+        cout << " | " << NameOfMaterial[i] << endl;
+    }
+    return counter;
+}
+

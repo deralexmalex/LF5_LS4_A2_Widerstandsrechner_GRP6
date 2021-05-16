@@ -9,10 +9,8 @@
 #include <string>
 #include <sstream>
 
-
 // User includes
 #include "hmi.h"
-#include "material.h"
 
 using namespace std;		// Setze Standard Bibliothek
 //=================================================================================================================//
@@ -34,10 +32,33 @@ void menMainMenu()
 	cout << " 2 | RTh einer Leitung berchenen" << endl;
 }
 
-void menPickMaterial()
+void menPickMaterial(const char *NameOfMaterial, int AnzahlMaterialien)
 {
 	cout << "Bitte eines der folgenden Materialien wählen: " << endl;
-	ArrMaterialien();
+	/*
+	for (int i = 0; i < 5; i++)
+	{
+		cout << setfill(' ');
+		cout << setw(2) << i + 1 << " | ";
+		
+		for (int f = 0; f < counter; f++)
+		{
+
+		}
+	*/
+	
+	int counter = 0, mCount, zCount = 0, i;
+
+	for (mCount = 0; mCount < 40; mCount++)
+	{
+		//for (counter = 0; (NameOfMaterial+zCount)[counter] != NULL; counter++); // Abzählen wieviele Elemente im Array sind
+		cout << "zCounter: " << mCount << endl;	// Debug Anzeige
+		cout << "Counter: " << counter << endl; // Debug Anzeige
+
+		zCount = zCount;
+		cout << "" << "\n" << NameOfMaterial + mCount << endl << endl;
+	}
+	
 }
 
 void menSubMenu()
