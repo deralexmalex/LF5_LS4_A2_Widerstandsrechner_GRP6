@@ -17,11 +17,33 @@ const double MaterialProperties[4][4] =
     {0.0286, 35.0, 0.0037, 1.3}
 };
 
-
+double SpecificResistanceOfMaterial[4] = { 0.0165, 0.0178, 0.023, 0.0286 };
+double ElectricalConductivityOfMaterial[4] = { 60.6, 56.2, 43.5, 35.0 };
+double TemperatureCoefficientA[4] = { 0.0038, 0.0039, 0.0039, 0.0037 };
+double TemperatureCoefficientB[4] = { 0.7, 0.6, 0.5, 1.3 };
 
 // Materialnamen
 // -------------
 const char* NameOfMaterial[] = { "Silber", "Kupfer", "Gold", "Aluminium" };
+
+double MaterialSpez(int Material, int Konstante)
+{
+    switch (Konstante)
+    {
+    case 1:
+        return SpecificResistanceOfMaterial[Material];
+        break;
+    case 2:
+        return ElectricalConductivityOfMaterial[Material];
+        break;
+    case 3:
+        return TemperatureCoefficientA[Material];
+        break;
+    case 4:
+        return TemperatureCoefficientB[Material];
+        break;
+    }
+}
 
 int ArrMaterialien()
 {

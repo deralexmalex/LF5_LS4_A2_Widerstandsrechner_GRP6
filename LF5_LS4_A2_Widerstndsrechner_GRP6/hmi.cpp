@@ -18,8 +18,6 @@ using namespace std;		// Setze Standard Bibliothek
 //=================================================================================================================//
 
 
-//  Funktionen
-
 void HelloUser() 
 {
 	cout << "                 Willkommen im Widerstandrechner 2021" << endl;
@@ -40,43 +38,22 @@ void menPickMaterial()
 	ArrMaterialien();
 }
 
-void menSubMenu()
+void printWantedParameter(string AddText)
 {
-
+	cout << "\nBitte geben Sie " << AddText << " an.";
 }
 
-void printResults(double result1, double result2)
+void printResult(double result)
 {
-	cout << "\n\nErgebnisse der Rechnung:" << endl;
-	cout << "Ergebnis 1: " << result1 << endl;
-	cout << "Ergebnis 2: " << result2 << endl << endl;
+	cout << "\n\nDas Ergebnisse der Rechnung lautet: " << result << " Ohm" << endl <<endl;
+	pause();
 }
-// Basis Funktionen
 
-int goTo(char& buchstabe)
+void InputOK()
 {
-	int goTo = 0;
-
-	if (buchstabe == 'm')	// Zurück in das letzte Menü
-	{
-		goTo = -1000;
-	}
-	if (buchstabe == 'b')	// Einen Schritt zurück
-	{
-		goTo = -1;
-	}
-
-	if (buchstabe == 'n')	// Einen Schriit vor
-	{
-		goTo = +1;
-	}
-
-	if (buchstabe == 'e')	// Programm sofort verlassen
-	{
-		goTo = 1000;
-	}
-
-	return goTo;
+	cout << "\n\nEingabe übernehmen oder widerrufen?" << endl;
+	cout << "*                '1' - Weiter" << endl;
+	cout << "* 'Jede andere Zahl' - Wiederufen";
 }
 
 void CLS()
@@ -95,8 +72,65 @@ void ClsAndHello()
 	HelloUser();
 }
 
-void GetStringFromUser(int iWant, int* strinStatus, int& ganzzahl, double& kommazahl, char& buchstabe)
+
+int MenuLimiter(int min, int max, int tmpInt)
 {
+	if ((max < tmpInt) || tmpInt < min)
+	{
+		cout << "Fehler! Bitte Menüpubnkt zwischen " << min << " & " << max << " eingeben." << endl;
+		pause();
+		return 0;
+		
+	}
+	else if ((max >= tmpInt) || tmpInt >= min)
+		return 1;
+}
+
+int goToYN(char buchstabe)
+{
+	switch (buchstabe)
+	{
+	case 'n':	// Zurück in das letzte Menü
+		return 0;
+		break;
+
+	case 'j':	// Einen Schritt zurück
+		return 1;
+		break;
+	}
+}
+
+int goTo(char buchstabe, int ruecksprungweite)
+{
+	// Bei Erweiterung oder Reduzierung um Optionen in GetStringFromUser()
+	// Char Abfangmechanismus anpassen
+
+	switch (buchstabe)
+	{
+	case 'm':	// Zurück in das letzte Menü
+		return -1000;
+		break;
+
+	case 'b':	// Einen Schritt zurück
+		return -ruecksprungweite;
+		break;
+
+	case 'e':	// Programm sofort verlassen
+		return 1000;
+		break;
+	}
+}
+
+void GetStringFromUser(int iWant, int &tmpStrinStat, int &tmpInt, double &tmpDdouble, char &tmpChar)
+{
+	/* Folgende Variablen müssen in der aufrufenden Funktion deklariert werden,
+	*  an GetStringFromUser() übergeben werden und können anschließend direkt ausgewertet werden.
+		int tmpStrinStat;
+		int tmpInt;
+		double tmpDdouble;
+		char tmpChar;
+	*/
+
 	// iWant Legende
 	//  0 = Alle Typen
 	// 10 = Zahl allgemein
@@ -105,8 +139,16 @@ void GetStringFromUser(int iWant, int* strinStatus, int& ganzzahl, double& komma
 	// 15 = Ganzzahl & Buchstabe
 	// 20 = Buchstabe
 
+	// Lokale Variablen
 	int strinLength = 0;
 	string input;
+
+	// Initalisiere Global verfügbare Variablen bei jedem Durchlauf
+	tmpStrinStat = 0;
+	tmpInt = 0;
+	tmpDdouble = 0;
+	tmpChar = 0;
+	
 
 	do {
 		cout << endl;
@@ -117,67 +159,78 @@ void GetStringFromUser(int iWant, int* strinStatus, int& ganzzahl, double& komma
 		// -----------------
 		istringstream strin1;			// Definiere Eingabestream
 		strin1.str(input);				// Streaminhalt mit String Variable füllen
-		strin1 >> ganzzahl;				// Variable von Eingabe-Stram einlesen
+		strin1 >> tmpInt;				// Variable von Eingabe-Stram einlesen
 
 		istringstream strin2;
 		strin2.str(input);
-		strin2 >> kommazahl;
+		strin2 >> tmpDdouble;
 
 		istringstream strin3;
 		strin3.str(input);
-		strin3 >> buchstabe;
+		strin3 >> tmpChar;
 
 		strinLength = input.length();	// Ermittle anzahl der eingegebenen Zeichen
 
+
 		// Werte Eingabe aus
-		// -----------------
-		if ((strinLength >= 1) && (ganzzahl == kommazahl))					// Ganzzahl OK
-			*strinStatus = 1;
+		if ((strinLength >= 1) && (tmpInt == tmpDdouble))					// Ganzzahl OK
+			tmpStrinStat = 1;
 
-		if ((strinLength >= 1) && (ganzzahl != kommazahl))					// Gleitpunkzzahl OK
-			*strinStatus = 2;
+		if ((strinLength >= 1) && (tmpInt != tmpDdouble))					// Gleitpunkzzahl OK
+			tmpStrinStat = 2;
 
-		if (((kommazahl == 0) && (strinLength > 1)) || (strinLength == 0))	// Eingabe ungültig
-			*strinStatus = 0;
+		if (((tmpDdouble == 0) && (strinLength > 1)) || (strinLength == 0))	// Eingabe ungültig
+			tmpStrinStat = 0;
 
-		if ((kommazahl == 0) && (strinLength == 1) && (buchstabe != 1))		// Char OK
-			*strinStatus = 5;
+		//if ((tmpDdouble == 0) && (strinLength == 1) && (tmpChar != 1))
+		if ((tmpDdouble == 0) && (strinLength == 1) && (tmpChar != 1))		// Char OK
+			tmpStrinStat = 5;
+
 
 		// iWant (Datentyp x)
-		// ------------------
 		switch (iWant) {
 		case 0:			//  0 = Alles
-			*strinStatus = *strinStatus;
+			tmpStrinStat = tmpStrinStat;
 			break;
 		case 10:		// 10 = Zahl allgemein
-			if ((*strinStatus != 1) && (*strinStatus != 2))
-				*strinStatus = 0;
+			if ((tmpStrinStat != 1) && (tmpStrinStat != 2))
+				tmpStrinStat = 0;
 			break;
 		case 11:		// 11 = Ganzzahl
-			if (*strinStatus != 1)
-				*strinStatus = 0;
+			if (tmpStrinStat != 1)
+				tmpStrinStat = 0;
 			break;
 		case 12:		// 12 = Gleitkommazahl
-			if (*strinStatus != 2)
-				*strinStatus = 0;
+			if (tmpStrinStat != 2)
+				tmpStrinStat = 0;
 			break;
 		case 15:		// 15 = Ganzzahl & Buchstabe
-			if ((*strinStatus != 1) && (*strinStatus != 5))
-				*strinStatus = 0;
+			if ((tmpStrinStat != 1) && (tmpStrinStat != 5))
+				tmpStrinStat = 0;
+			break;
+		case 17:		// 17 = Zahl & Buchstabe
+			if ((tmpStrinStat != 1) && (tmpStrinStat != 2) && (tmpStrinStat != 5))
+				tmpStrinStat = 0;
 			break;
 		case 20:		// 20 = Buchstabe
-			if (*strinStatus != 5)
-				*strinStatus = 0;
+			if (tmpStrinStat != 5 )
+				tmpStrinStat = 0;
 			break;
 		default:		// Ungültiger Wert an Funktion übergeben
 			cout << "\n\n!!! FEHLER !!!\nFunktion 'GetStringFromUser' falsch deklariert!\n\n";
-			*strinStatus = -1;
+			tmpStrinStat = -1;
 			break;
 		}
 
-		if (*strinStatus == 0)
-			cout << "Ungültige Eingabe. Bitte erneut versuchen!" << endl;		// Print Eingabe nicht i.O.
 
-	} while (*strinStatus == 0);
+		// Fange ungültige Char Eingaben ab
+		// * Abhängig von goTo() 
+		if ((tmpStrinStat == 5) && ((tmpChar != 'm') && (tmpChar != 'b') && (tmpChar != 'e')))
+			tmpStrinStat = 0;
+
+
+		if (tmpStrinStat == 0)
+			cout << "Ungültige Eingabe. Bitte erneut versuchen!" << endl;		// Print Eingabe nicht i.O.
+	} while (tmpStrinStat == 0);
 }
 
