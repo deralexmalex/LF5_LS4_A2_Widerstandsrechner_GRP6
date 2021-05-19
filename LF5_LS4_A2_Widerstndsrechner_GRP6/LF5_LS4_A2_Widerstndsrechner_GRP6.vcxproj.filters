@@ -38,8 +38,5 @@
     <ClInclude Include="material.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="control.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

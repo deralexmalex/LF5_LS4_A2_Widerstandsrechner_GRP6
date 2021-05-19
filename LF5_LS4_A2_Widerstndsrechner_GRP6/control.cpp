@@ -17,15 +17,12 @@
 //=================================================================================================================//
 
 // User includes
-//#include "control.h"
 #include "calculate.h"
 #include "hmi.h"
 #include "material.h"
 
 // Standard libarys
 #include <locale>
-
-
 
 using namespace std;		// Setze Standard Bibliothek
 //=================================================================================================================//
@@ -53,24 +50,30 @@ int main()
 
 		switch (step)
 		{
-		case 1:		// Hauptmenü (Auswahl Rechenziel)
+
+		// Hauptmenü (Auswahl Rechenziel)
+		// ******************************
+		case 1:
 			menMainMenu();
 			GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
 			
-			if ((tmpStrinStat == 1) && (MenuLimiter(1, 2, tmpInt) == 1)) {
+			if ((tmpStrinStat == 1) && (MenuLimiter(2, tmpInt) == 1)) {
 				MainMenuChoose = tmpInt;
 				step++;
 			}
 
 			if (tmpStrinStat == 5)
 				step = step + goTo(tmpChar, 0);
+			
 			break;
 
-		case 2:		// Auswahl Material
+		// Auswahl Material
+		// ****************
+		case 2:
 			menPickMaterial();
 			GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
 
-			if ((tmpStrinStat == 1) && (MenuLimiter(1, 4, tmpInt) == 1)) {
+			if ((tmpStrinStat == 1) && (MenuLimiter(4, tmpInt) == 1)) {
 				material = tmpInt;
 
 				switch (MainMenuChoose) {
@@ -84,55 +87,65 @@ int main()
 
 			if (tmpStrinStat == 5)
 				step = step + goTo(tmpChar, 1);
+			
 			break;
 		
-		case 3:		// Werte für Menüpunkt 1 einlesen
+		// Werte für Hauptmenüpunkt 1 einlesen
+		// ***********************************
+		case 3:
 			do {
-				printWantedParameter("den Widerstand in [Ohm]");
-				GetStringFromUser(10, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
-				ActR20 = tmpInt;
+				printWantedParameter("den Widerstand in [Ohm]");					// Lese Werte ein
+				ActR20 = GetMathStringFromUser(+1);
 
 				printWantedParameter("die Umgebungstemperatur in [°C]");
-				GetStringFromUser(10, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
-				ActTempr = tmpInt;
+				ActTempr = GetMathStringFromUser(0);
 
-				InputOK();
-				GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
+				InputOK();															// Rückfrage ob Eingabe OK
+				GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);	// + Möglichkeit zu Navigieren
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 1);
+			
 			} while ((1 != tmpInt) && (5 != tmpStrinStat));
+			
 			if (5 != tmpStrinStat)
 				step = step + 2;
+			
 			break;
 		
-		case 4:		// Werte für Menüpunkt 2 einlesen
+		// Werte für Hauptmenüpunkt 2 einlesen
+		// ***********************************
+		case 4:		
 			do {
-				printWantedParameter("die Leitungslänge in [m]");
-				GetStringFromUser(10, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
-				ActLeiterLaenge = tmpInt;
+				printWantedParameter("die Leitungslänge in [m]");					// Lese Werte ein
+				ActLeiterLaenge = GetMathStringFromUser(+1);
 
 				printWantedParameter("den Leitungsquerschnitt in [mm2]");
-				GetStringFromUser(10, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
-				ActLeiterQuerschnitt = tmpInt;
+				ActLeiterQuerschnitt = GetMathStringFromUser(+1);
 
 				printWantedParameter("die Umgebungstemperatur in [°C]");
-				GetStringFromUser(10, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
-				ActTempr = tmpInt;
+				ActTempr = GetMathStringFromUser(0);
 
-				InputOK();
-				GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
+				InputOK();															// Rückfrage ob Eingabe OK
+				GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);	// + Möglichkeit zu Navigieren
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 2);
+			
 			} while ((1 != tmpInt) && (5 != tmpStrinStat));
+			
 			if (5 != tmpStrinStat)
 				step = step + 2;
+			
 			break;
-
-		case 5:
+		
+		// Berechnung & Ausgabe für Hauptmenüpunkt 1
+		// *****************************************
+		case 5:		
 			printResult(CalcResistorR20RTh(ActR20, ActTempr, material));
 			step = 1;
 			break;
 
+		// Berechnung & Ausgabe für Hauptmenüpunkt 2
+		// *****************************************
 		case 6:
 			printResult(CalcResistorWireRTh(ActLeiterLaenge, ActLeiterQuerschnitt, ActTempr, material));
 			step = 1;
@@ -142,48 +155,6 @@ int main()
 			if (step <= 0)	// Zurück zum Menü
 				step = 1;
 		}	
-	} while (step < 1000);
-	
-
-
-/*
-	do
-	{
-		choose = 0;
-		HelloUser();
-		mainmenu();
-
-	} while (choose != 'e');
-
-	return 0;
-}
-
-int mainmenu()										// Hauptmenü
-{
-
-
-
-	do
-	{
-		int choose;
-		choose = 0;
-		menMainMenu();
-
-
-		switch (choose)
-		{
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		default:
-			break;
-		}
-	} while (true);
-
-*/
-
+	} while (step < 1000);	// Programm Zyklus oder Programm verlassen
 	return 0;
 }

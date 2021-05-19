@@ -8,7 +8,7 @@
 #include <iomanip> 
 #include <string>
 #include <sstream>
-
+#include <regex>
 
 // User includes
 #include "hmi.h"
@@ -17,6 +17,9 @@
 using namespace std;		// Setze Standard Bibliothek
 //=================================================================================================================//
 
+
+// Ausgebende Funktionen
+// ---------------------
 
 void HelloUser() 
 {
@@ -45,15 +48,8 @@ void printWantedParameter(string AddText)
 
 void printResult(double result)
 {
-	cout << "\n\nDas Ergebnisse der Rechnung lautet: " << result << " Ohm" << endl <<endl;
+	cout << "Das Ergebnisse der Rechnung lautet: " << result << " Ohm" << endl <<endl;
 	pause();
-}
-
-void InputOK()
-{
-	cout << "\n\nEingabe übernehmen oder widerrufen?" << endl;
-	cout << "*                '1' - Weiter" << endl;
-	cout << "* 'Jede andere Zahl' - Wiederufen";
 }
 
 void CLS()
@@ -73,31 +69,26 @@ void ClsAndHello()
 }
 
 
-int MenuLimiter(int min, int max, int tmpInt)
+// Eingabe Funktionen und Auswertende Funktionen
+// ---------------------------------------------
+void InputOK()
 {
-	if ((max < tmpInt) || tmpInt < min)
+	cout << "\n\nEingabe übernehmen oder widerrufen?" << endl;
+	cout << "*                '1' - Weiter" << endl;
+	cout << "* 'Jede andere Zahl' - Wiederufen";
+}
+
+int MenuLimiter(int max, int tmpInt)
+{
+	if (max < tmpInt)
 	{
-		cout << "Fehler! Bitte Menüpubnkt zwischen " << min << " & " << max << " eingeben." << endl;
+		cout << "Fehler! Bitte Menüpubnkt zwischen " << 1 << " & " << max << " eingeben." << endl;
 		pause();
 		return 0;
 		
 	}
-	else if ((max >= tmpInt) || tmpInt >= min)
+	else if (max >= tmpInt)
 		return 1;
-}
-
-int goToYN(char buchstabe)
-{
-	switch (buchstabe)
-	{
-	case 'n':	// Zurück in das letzte Menü
-		return 0;
-		break;
-
-	case 'j':	// Einen Schritt zurück
-		return 1;
-		break;
-	}
 }
 
 int goTo(char buchstabe, int ruecksprungweite)
@@ -234,3 +225,48 @@ void GetStringFromUser(int iWant, int &tmpStrinStat, int &tmpInt, double &tmpDdo
 	} while (tmpStrinStat == 0);
 }
 
+double GetMathStringFromUser(int direction)
+{
+	// Lokale Variablen
+	string input;
+	double tmpDdouble = 0;
+	char tmpChar = 0;
+	int strinLength = 0;
+	int tmpStrinStat = 0;
+
+	do {
+		tmpStrinStat = 0;
+
+		cout << endl;
+		cout << "Erwarte eingabe als Zahl: ";	// Benutzeraufforderung
+		getline(cin, input);			// Benutzeringabe
+
+
+		// Werte auf double aus
+		// --------------------
+		istringstream strin1;			// Definiere Eingabestream
+		strin1.str(input);				// Streaminhalt mit String Variable füllen
+		strin1 >> tmpDdouble;			// Variable von Eingabe-Stram einlesen
+
+		if (regex_search(input.c_str(), regex("[a-z]")) || regex_search(input.c_str(), regex("[A-Z]")) || (regex_search(input.c_str(), regex("[^[:alnum:]]")) && (false == regex_search(input.c_str(), regex(","))) && (false == regex_search(input.c_str(), regex("-"))) ) )
+		{
+			cout << "Ungültige Eingabe. Bitte erneut versuchen!" << endl;			// Print Eingabe nicht i.O.
+			tmpStrinStat = 1;
+		}
+		
+		if ((direction != 0) && (direction == +1) && (tmpDdouble <= 0))
+		{
+			cout << "Ungültige Eingabe. Eingabe muss positiv sein!" << endl;		// Print Eingabe muss positiv sein
+			tmpStrinStat = 1;
+		}
+	} while (tmpStrinStat == 1);
+	
+	return tmpDdouble;
+}
+
+
+
+void GetNavStringFromUser(int iWant, int& tmpStrinStat, int& tmpInt, char& tmpChar)
+{
+
+}

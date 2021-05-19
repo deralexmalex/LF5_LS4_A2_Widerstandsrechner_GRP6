@@ -9,22 +9,13 @@
 
 using namespace std;
 
-const double MaterialProperties[4][4] =
-{
-    {0.0165, 60.6, 0.0038, 0.7},
-    {0.0178, 56.2, 0.0039,0.6},
-    {0.023, 43.5, 0.0039, 0.5 },
-    {0.0286, 35.0, 0.0037, 1.3}
-};
 
+// Werte Speicher & Auswertung
+// ---------------------------
 double SpecificResistanceOfMaterial[4] = { 0.0165, 0.0178, 0.023, 0.0286 };
 double ElectricalConductivityOfMaterial[4] = { 60.6, 56.2, 43.5, 35.0 };
 double TemperatureCoefficientA[4] = { 0.0038, 0.0039, 0.0039, 0.0037 };
 double TemperatureCoefficientB[4] = { 0.7, 0.6, 0.5, 1.3 };
-
-// Materialnamen
-// -------------
-const char* NameOfMaterial[] = { "Silber", "Kupfer", "Gold", "Aluminium" };
 
 double MaterialSpez(int Material, int Konstante)
 {
@@ -44,6 +35,11 @@ double MaterialSpez(int Material, int Konstante)
         break;
     }
 }
+
+
+// Materialnamen Stringspeicher & Auswertung / Ausgabe
+// ---------------------------------------------------
+const char* NameOfMaterial[] = { "Silber", "Kupfer", "Gold", "Aluminium" };
 
 int ArrMaterialien()
 {
