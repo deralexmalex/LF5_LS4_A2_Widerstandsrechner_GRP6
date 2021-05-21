@@ -46,7 +46,7 @@ void menPickMaterial()
 
 void printResult(double result)
 {
-	cout << "Das Ergebnisse der Rechnung lautet: " << result << " Ohm" << endl <<endl;
+	cout << "\n\nDas Ergebnisse der Rechnung lautet: " << result << " Ohm." << endl <<endl;
 	system("pause");
 }
 
@@ -54,7 +54,7 @@ void InputOK()
 {
 	cout << "\n\nEingabe übernehmen oder widerrufen?" << endl;
 	cout << "*                '1' - Weiter" << endl;
-	cout << "* 'Jede andere Zahl' - Wiederufen";
+	cout << "* 'Jede andere Zahl' - Wiederufen" << endl;
 }
 
 
