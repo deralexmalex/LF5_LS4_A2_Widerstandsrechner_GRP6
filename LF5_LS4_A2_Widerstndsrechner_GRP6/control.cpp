@@ -16,13 +16,13 @@
 // **************************                        MAINCICLE                         *************************** //
 //=================================================================================================================//
 
-// User includes
+// Standard libarys
+#include <locale>
+
+// Personal libarys
 #include "calculate.h"
 #include "hmi.h"
 #include "material.h"
-
-// Standard libarys
-#include <locale>
 
 using namespace std;		// Setze Standard Bibliothek
 //=================================================================================================================//
@@ -46,115 +46,131 @@ int main()
 	
 	// Programm
 	do {
-		ClsAndHello();
+		HelloUserHead();
 
-		switch (step)
-		{
+		switch (step) {
 
 		// Hauptmenü (Auswahl Rechenziel)
 		// ******************************
 		case 1:
 			menMainMenu();
-			GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
+			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 			
-			if ((tmpStrinStat == 1) && (MenuLimiter(2, tmpInt) == 1)) {
+			// Auswertung Menüauswahl
+			if ((tmpStrinStat == 1) && (MenuLimiter(2, tmpInt) == 1))
+			{
 				MainMenuChoose = tmpInt;
-				step++;
+				step++;					// Schrittziel: Materialauswahl
 			}
 
+			// Auswertung Navi
 			if (tmpStrinStat == 5)
 				step = step + goTo(tmpChar, 0);
 			
 			break;
 
+
 		// Auswahl Material
 		// ****************
 		case 2:
 			menPickMaterial();
-			GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);
+			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 
+			// Auswertung Menüauswahl
 			if ((tmpStrinStat == 1) && (MenuLimiter(4, tmpInt) == 1)) {
 				material = tmpInt;
 
 				switch (MainMenuChoose) {
 				case 1:
-					step = step + 1;
+					step = step + 1;	// Schrittziel: Eingabe Parameter für Hauptmenüpunkt 1
 					break;
 				case 2:
-					step = step + 2;
+					step = step + 2;	// Schrittziel: Eingabe Parameter für Hauptmenüpunkt 2
 				}
 			}
 
+			// Auswertung Navi
 			if (tmpStrinStat == 5)
 				step = step + goTo(tmpChar, 1);
 			
 			break;
 		
+
 		// Werte für Hauptmenüpunkt 1 einlesen
 		// ***********************************
 		case 3:
 			do {
-				printWantedParameter("den Widerstand in [Ohm]");					// Lese Werte ein
-				ActR20 = GetMathStringFromUser(+1);
+				// Lese Werte von Benutzer ein
+				ActR20 = WantedParameter("den Widerstand in [Ohm]", +1);								
+				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
-				printWantedParameter("die Umgebungstemperatur in [°C]");
-				ActTempr = GetMathStringFromUser(0);
-
-				InputOK();															// Rückfrage ob Eingabe OK
-				GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);	// + Möglichkeit zu Navigieren
+				// Rückfrage ob Eingabe OK & Möglichkeit zu Navigieren
+				InputOK();																			
+				GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);								
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 1);
+
+				if ((1 != tmpInt) && (5 != tmpStrinStat))
+					HelloUserHead();
+
+			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nutzer sagt: nicht OK
 			
-			} while ((1 != tmpInt) && (5 != tmpStrinStat));
-			
-			if (5 != tmpStrinStat)
+			// Auswertung Navi
+			if (5 != tmpStrinStat)		// Schrittziel: Berechnung & Ausgabe
 				step = step + 2;
 			
 			break;
 		
+
 		// Werte für Hauptmenüpunkt 2 einlesen
 		// ***********************************
 		case 4:		
 			do {
-				printWantedParameter("die Leitungslänge in [m]");					// Lese Werte ein
-				ActLeiterLaenge = GetMathStringFromUser(+1);
+				// Lese Werte von Benutzer ein
+				ActLeiterLaenge = WantedParameter("die Leitungslänge in [m]", +1);
+				ActLeiterQuerschnitt = WantedParameter("den Leitungsquerschnitt in [mm2]", +1);
+				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
-				printWantedParameter("den Leitungsquerschnitt in [mm2]");
-				ActLeiterQuerschnitt = GetMathStringFromUser(+1);
-
-				printWantedParameter("die Umgebungstemperatur in [°C]");
-				ActTempr = GetMathStringFromUser(0);
-
-				InputOK();															// Rückfrage ob Eingabe OK
-				GetStringFromUser(15, tmpStrinStat, tmpInt, tmpDdouble, tmpChar);	// + Möglichkeit zu Navigieren
+				// Rückfrage ob Eingabe OK & Möglichkeit zu Navigieren
+				InputOK();												
+				GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 2);
+
+				if ((1 != tmpInt) && (5 != tmpStrinStat))
+					HelloUserHead();
+
+			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nuter sagt: nicht OK
 			
-			} while ((1 != tmpInt) && (5 != tmpStrinStat));
-			
-			if (5 != tmpStrinStat)
+			if (5 != tmpStrinStat)		// Schrittziel: Berechnung & Ausgabe
 				step = step + 2;
 			
 			break;
 		
+
 		// Berechnung & Ausgabe für Hauptmenüpunkt 1
 		// *****************************************
 		case 5:		
 			printResult(CalcResistorR20RTh(ActR20, ActTempr, material));
-			step = 1;
+			step = 1;					// Schrittziel: Hauptmenü
 			break;
+
 
 		// Berechnung & Ausgabe für Hauptmenüpunkt 2
 		// *****************************************
 		case 6:
 			printResult(CalcResistorWireRTh(ActLeiterLaenge, ActLeiterQuerschnitt, ActTempr, material));
-			step = 1;
+			step = 1;					// Schrittziel: Hauptmenü
 			break;
-
-		default:
-			if (step <= 0)	// Zurück zum Menü
-				step = 1;
 		}	
-	} while (step < 1000);	// Programm Zyklus oder Programm verlassen
+
+
+		// Navigation in Hauptmenü
+		// ***********************
+		if (step <= 0)				// Schrittziel: Hauptmenü
+			step = 1;
+
+	} while (step < 1000);			// Programm widerholen oder abbrechen
+	
 	return 0;
 }
