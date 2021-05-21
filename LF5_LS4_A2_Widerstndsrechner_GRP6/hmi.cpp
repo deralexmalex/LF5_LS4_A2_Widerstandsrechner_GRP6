@@ -1,8 +1,15 @@
 //=================================================================================================================//
 // **************************                           HMI                            *************************** //
 //=================================================================================================================//
+//
+//	Inhalt:
+//		Einordnung:			FS-LF5-LS4
+//		Projekt: 			Aufgabe_ls4_02
+//	Autor:
+//		Name:				Königs, Bergs, Mommertz, Bremen
+//		Organisaion:		Gruppe 6, BK-GuT
 
-// System libarys
+// System libraries
 #include <iostream>
 #include <locale>
 #include <iomanip> 
@@ -10,18 +17,18 @@
 #include <sstream>
 #include <regex>
 
-// Personal libaris
+// Personal libraries
 #include "hmi.h"
 #include "material.h"
 
-using namespace std;		// Setze Standard Bibliothek
+using namespace std;	
 //=================================================================================================================//
 
 
 
 
 
-// Ausgebe Funktionen
+// Ausgabe Funktionen
 // ==================
 
 void HelloUserHead() 
@@ -36,12 +43,14 @@ void HelloUserHead()
 
 void menMainMenu()
 {
-	cout << " 1 | Temperaturabhängigen Widerstands (RTh) eines Materials berechnen" << endl;
-	cout << " 2 | Temperaturabhängigen Widerstands (RTh) einer Leitung berchenen" << endl;
+	HelloUserHead();
+	cout << " 1 | Temperaturabhängigen Widerstand (RTh) eines Materials berechnen" << endl;
+	cout << " 2 | Temperaturabhängigen Widerstand (RTh) einer Leitung berechenen" << endl;
 }
 
 void menPickMaterial()
 {
+	HelloUserHead();
 	cout << "Bitte eines der folgenden Materialien wählen: " << endl;
 	ArrMaterialien();		// Array wird in material.cpp ausgewertet und ausgegeben
 							// (aufgrund von Parameterübergabe Problemen)
@@ -67,7 +76,7 @@ void printResult(double result, double laenge, double querschnitt, double temper
 
 void InputOK()
 {
-	cout << "\n'1' -> Weiter    ||     'beliebige Zahl' -> Eingaben Wiederufen" << endl;
+	cout << "\n'1' -> Weiter     ||     'beliebige Zahl' -> Eingaben Widerrufen" << endl;
 }
 
 
@@ -112,13 +121,13 @@ void GetNavStringFromUser(int& tmpStrinStat, int& tmpInt, char& tmpChar)
 
 		cout << endl;
 		cout << "Erwarte Navi Eingabe: ";	// Benutzeraufforderung
-		getline(cin, input);				// Benutzeringabe
+		getline(cin, input);				// Benutzereingabe
 
 		// Bereite Werte vor
 		// -----------------
 		istringstream strin1;				// Definiere Eingabestream
 		strin1.str(input);					// Streaminhalt mit String Variable füllen
-		strin1 >> tmpInt;					// Variable von Eingabe-Stram einlesen
+		strin1 >> tmpInt;					// Variable von Eingabe-Stream einlesen
 
 		istringstream strin2;
 		strin2.str(input);
@@ -143,7 +152,7 @@ void GetNavStringFromUser(int& tmpStrinStat, int& tmpInt, char& tmpChar)
 		if (tmpStrinStat == 0)
 			cout << "Ungültige Eingabe. Bitte erneut versuchen!" << endl;	
 
-	} while (tmpStrinStat == 0);	// Widerhole, solgane eingabe nicht OK
+	} while (tmpStrinStat == 0);	// Wiederhole, solgane eingabe nicht OK
 }
 
 double GetMathStringFromUser(int direction)
@@ -160,15 +169,15 @@ double GetMathStringFromUser(int direction)
 		tmpStrinStat = 0;
 
 		cout << endl;
-		cout << "Erwarte eingabe als Zahl: ";	// Benutzeraufforderung
-		getline(cin, input);					// Benutzeringabe
+		cout << "Erwarte Eingabe als Zahl: ";	// Benutzeraufforderung
+		getline(cin, input);					// Benutzereingabe
 
 
 		// Werte auf double aus
 		// --------------------
 		istringstream strin1;					// Definiere Eingabestream
 		strin1.str(input);						// Streaminhalt mit String Variable füllen
-		strin1 >> tmpDdouble;					// Variable von Eingabe-Stram einlesen
+		strin1 >> tmpDdouble;					// Variable von Eingabe-Stream einlesen
 
 		// Wenn Eingabe nicht OK
 		if (InputTrouble = ((ThereIsAnyLetOSymb(input) && (false == ThereIsAnyMathSymbol(input))) || (ThereIsAnyMathSymbol(input) && (false == ThereIsAnyNumber(input)))))
@@ -183,7 +192,7 @@ double GetMathStringFromUser(int direction)
 			cout << "Ungültige Eingabe. Eingabe muss positiv sein!" << endl;
 			tmpStrinStat = 1;
 		}
-	} while (tmpStrinStat == 1);
+	} while (tmpStrinStat == 1);	// Wiederhole, solgane eingabe nicht OK
 
 	return tmpDdouble;
 }
@@ -193,7 +202,7 @@ int MenuLimiter(int max, int tmpInt)
 	// Limitiere Menüeingabe entsprechend gewünschter Menülänge
 	if ( (max < tmpInt) || (1 > tmpInt) )
 	{
-		cout << "Fehler! Bitte Menüpubnkt zwischen " << 1 << " & " << max << " eingeben." << endl << endl;
+		cout << "Fehler! Bitte Menüpunkt zwischen " << 1 << " & " << max << " eingeben." << endl << endl;
 		
 		system("pause");
 		return 0;
@@ -257,7 +266,7 @@ void GetStringFromUser(int iWant, int &tmpStrinStat, int &tmpInt, double &tmpDdo
 	do {
 		cout << endl;
 		cout << "Erwarte eingabe: ";	// Benutzeraufforderung
-		getline(cin, input);			// Benutzeringabe
+		getline(cin, input);			// Benutzereingabe
 
 		// Bereite Werte vor
 		// -----------------

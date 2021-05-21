@@ -54,7 +54,7 @@ int ArrMaterialPices()
 
 void ArrMaterialien()
 {
-    // Die Namen der Elemente auflisten (wird hier ausgeführt, d Übergabe des Arrays an HMI zu aufwendig)
+    // Die Namen der Elemente auflisten (wird hier ausgeführt, da Übergabe des Arrays an HMI zu aufwändig)
     for (int i = 0; i < ArrMaterialPices(); i++)
     {
         cout << setfill(' ');

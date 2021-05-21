@@ -1,30 +1,23 @@
-﻿//
+﻿//=================================================================================================================//
+// **************************                        MAINCICLE                         *************************** //
+//=================================================================================================================//
+//
 //	Inhalt:
 //		Einordnung:			FS-LF5-LS4
 //		Projekt: 			Aufgabe_ls4_02
-//		Thema:				XXXXX
 //	Autor:
-//		Name:				Bergs, Bremen, K�nigs, Mommertz
-//		Organisaion:		BK-GuT
-//
-//	Datum:
-//		Erstellt:			XX.04.2021
-//		Letzte �nderung:	XX.05.2021
-//
-//
-//=================================================================================================================//
-// **************************                        MAINCICLE                         *************************** //
-//=================================================================================================================//
+//		Name:				Königs, Bergs, Mommertz, Bremen
+//		Organisaion:		Gruppe 6, BK-GuT
 
-// Standard libarys
+// System libraries
 #include <locale>
 
-// Personal libarys
+// Personal libraries
 #include "calculate.h"
 #include "hmi.h"
 #include "material.h"
 
-using namespace std;		// Setze Standard Bibliothek
+using namespace std;
 //=================================================================================================================//
 #include <iostream>
 
@@ -35,9 +28,9 @@ int main()
 	// Variablendeklaration
 	// ====================
 
-	int tmpStrinStat;			// Tempoär zu verwendender UserInput Status
-	int tmpInt;					// Tempoär zu verwendender UserInput int
-	char tmpChar;				// Tempoär zu verwendender UserInput char
+	int tmpStrinStat;			// Temporär zu verwendender UserInput Status
+	int tmpInt;					// Temporär zu verwendender UserInput int
+	char tmpChar;				// Temporär zu verwendender UserInput char
 
 	double ActTempr = 0, ActLeiterLaenge = 0, ActLeiterQuerschnitt = 0;		// Wertespeicher für Berechnungen
 
@@ -54,7 +47,6 @@ int main()
 		// Hauptmenü (Auswahl Rechenziel)
 		// ******************************
 		case 1:
-			HelloUserHead();
 			menMainMenu();
 			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 			
@@ -75,7 +67,6 @@ int main()
 		// Auswahl Material
 		// ****************
 		case 2:
-			HelloUserHead();
 			menPickMaterial();
 			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 
@@ -103,9 +94,7 @@ int main()
 		// ***********************************
 		case 3:
 			do {
-				// Lese Werte von Benutzer ein
-				HelloUserHead();
-				//ActR20 = WantedParameter("den Widerstand in [Ohm]", +1);								
+				// Lese Werte von Benutzer ein					
 				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
 				// Rückfrage ob Eingabe OK & Möglichkeit zu Navigieren
@@ -114,7 +103,7 @@ int main()
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 1);
 
-			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nutzer sagt: nicht OK
+			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Wiederhole Eingabe wenn Nutzer sagt: nicht OK
 			
 			if (5 != tmpStrinStat)		// Schrittziel: Berechnung & Ausgabe
 				step = step + 2;
@@ -138,7 +127,7 @@ int main()
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 2);		
 
-			} while (false || (1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nuter sagt: nicht OK
+			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Wiederhole Eingabe wenn Nuter sagt: nicht OK
 			
 			if (5 != tmpStrinStat)		// Schrittziel: Berechnung & Ausgabe
 				step = step + 2;
@@ -170,7 +159,7 @@ int main()
 		if (step <= 0)				// Schrittziel: Hauptmenü
 			step = 1;
 
-	} while (step < 1000);			// Programm widerholen oder abbrechen
+	} while (step < 1000);			// Programm wiederholen oder abbrechen
 	
 	return 0;
 }
