@@ -46,7 +46,7 @@ void menPickMaterial()
 
 void printResult(double result)
 {
-	cout << "\n\nDas Ergebnisse der Rechnung lautet: " << result << " Ohm." << endl <<endl;
+	cout << "\n\nDas Ergebnis der Rechnung lautet: " << result << " Ohm." << endl <<endl;
 	system("pause");
 }
 
@@ -95,6 +95,8 @@ void GetNavStringFromUser(int& tmpStrinStat, int& tmpInt, char& tmpChar)
 
 
 	do {
+		tmpStrinStat = 0;
+
 		cout << endl;
 		cout << "Erwarte Navi Eingabe: ";	// Benutzeraufforderung
 		getline(cin, input);				// Benutzeringabe
@@ -142,6 +144,8 @@ double GetMathStringFromUser(int direction)
 	bool InputTrouble = false;
 
 	do {
+		tmpStrinStat = 0;
+
 		cout << endl;
 		cout << "Erwarte eingabe als Zahl: ";	// Benutzeraufforderung
 		getline(cin, input);					// Benutzeringabe

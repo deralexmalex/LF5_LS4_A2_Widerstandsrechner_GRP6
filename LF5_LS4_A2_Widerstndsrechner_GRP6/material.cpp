@@ -22,21 +22,21 @@ double ElectricalConductivityOfMaterial[4] = { 60.6, 56.2, 43.5, 35.0 };
 double TemperatureCoefficientA[4] = { 0.0038, 0.0039, 0.0039, 0.0037 };
 double TemperatureCoefficientB[4] = { 0.7, 0.6, 0.5, 1.3 };
 
-double MaterialSpez(int Material, int Konstante)
+double MaterialSpez(int Konstante, int Material)
 {
     switch (Konstante)
     {
     case 1:
-        return SpecificResistanceOfMaterial[Material];
+        return SpecificResistanceOfMaterial[Material-1];
         break;
     case 2:
-        return ElectricalConductivityOfMaterial[Material];
+        return ElectricalConductivityOfMaterial[Material-1];
         break;
     case 3:
-        return TemperatureCoefficientA[Material];
+        return TemperatureCoefficientA[Material-1];
         break;
     case 4:
-        return TemperatureCoefficientB[Material];
+        return TemperatureCoefficientB[Material-1];
         break;
     }
 }

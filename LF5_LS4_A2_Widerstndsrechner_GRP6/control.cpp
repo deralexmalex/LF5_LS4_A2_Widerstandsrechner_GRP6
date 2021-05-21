@@ -26,7 +26,7 @@
 
 using namespace std;		// Setze Standard Bibliothek
 //=================================================================================================================//
-
+#include <iostream>
 
 int main()
 {
@@ -39,7 +39,7 @@ int main()
 	int tmpInt;					// Tempoär zu verwendender UserInput int
 	char tmpChar;				// Tempoär zu verwendender UserInput char
 
-	double ActR20 = 0, ActTempr = 0, ActLeiterLaenge = 0, ActLeiterQuerschnitt = 0;		// Wertespeicher für Berechnungen
+	double ActTempr = 0, ActLeiterLaenge = 0, ActLeiterQuerschnitt = 0;		// Wertespeicher für Berechnungen
 
 	int step = 1;				// Merker: aktueller Schritt
 	int material = 0;			// Merker: Materialauswahl
@@ -105,7 +105,7 @@ int main()
 			do {
 				// Lese Werte von Benutzer ein
 				HelloUserHead();
-				ActR20 = WantedParameter("den Widerstand in [Ohm]", +1);								
+				//ActR20 = WantedParameter("den Widerstand in [Ohm]", +1);								
 				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
 				// Rückfrage ob Eingabe OK & Möglichkeit zu Navigieren
@@ -116,7 +116,6 @@ int main()
 
 			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nutzer sagt: nicht OK
 			
-			// Auswertung Navi
 			if (5 != tmpStrinStat)		// Schrittziel: Berechnung & Ausgabe
 				step = step + 2;
 			
@@ -134,12 +133,15 @@ int main()
 				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
 				// Rückfrage ob Eingabe OK & Möglichkeit zu Navigieren
+				/*
 				InputOK();												
 				GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 2);
+				*/
+				
 
-			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nuter sagt: nicht OK
+			} while (false || (1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nuter sagt: nicht OK
 			
 			if (5 != tmpStrinStat)		// Schrittziel: Berechnung & Ausgabe
 				step = step + 2;
@@ -149,9 +151,10 @@ int main()
 
 		// Berechnung & Ausgabe für Hauptmenüpunkt 1
 		// *****************************************
-		case 5:		
-			printResult(CalcResistorR20RTh(ActR20, ActTempr, material));
+		case 5:	
+			printResult(CalcResistorR20RTh(ActTempr, material));
 			step = 1;					// Schrittziel: Hauptmenü
+
 			break;
 
 
@@ -160,6 +163,7 @@ int main()
 		case 6:
 			printResult(CalcResistorWireRTh(ActLeiterLaenge, ActLeiterQuerschnitt, ActTempr, material));
 			step = 1;					// Schrittziel: Hauptmenü
+
 			break;
 		}	
 
