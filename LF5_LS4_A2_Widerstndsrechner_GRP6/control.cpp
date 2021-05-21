@@ -46,13 +46,12 @@ int main()
 	
 	// Programm
 	do {
-		HelloUserHead();
-
 		switch (step) {
 
 		// Hauptmenü (Auswahl Rechenziel)
 		// ******************************
 		case 1:
+			HelloUserHead();
 			menMainMenu();
 			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 			
@@ -73,6 +72,7 @@ int main()
 		// Auswahl Material
 		// ****************
 		case 2:
+			HelloUserHead();
 			menPickMaterial();
 			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 
@@ -101,6 +101,7 @@ int main()
 		case 3:
 			do {
 				// Lese Werte von Benutzer ein
+				HelloUserHead();
 				ActR20 = WantedParameter("den Widerstand in [Ohm]", +1);								
 				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
@@ -110,8 +111,8 @@ int main()
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 1);
 
-				if ((1 != tmpInt) && (5 != tmpStrinStat))
-					HelloUserHead();
+//				if ((1 != tmpInt) && (5 != tmpStrinStat))
+//					HelloUserHead();
 
 			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nutzer sagt: nicht OK
 			
@@ -127,6 +128,7 @@ int main()
 		case 4:		
 			do {
 				// Lese Werte von Benutzer ein
+				HelloUserHead();
 				ActLeiterLaenge = WantedParameter("die Leitungslänge in [m]", +1);
 				ActLeiterQuerschnitt = WantedParameter("den Leitungsquerschnitt in [mm2]", +1);
 				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
@@ -137,8 +139,8 @@ int main()
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 2);
 
-				if ((1 != tmpInt) && (5 != tmpStrinStat))
-					HelloUserHead();
+//				if ((1 != tmpInt) && (5 != tmpStrinStat))
+//					HelloUserHead();
 
 			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nuter sagt: nicht OK
 			
