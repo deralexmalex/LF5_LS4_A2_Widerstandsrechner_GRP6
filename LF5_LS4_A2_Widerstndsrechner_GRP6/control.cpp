@@ -80,7 +80,7 @@ int main()
 			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 
 			// Auswertung Menüauswahl
-			if ((tmpStrinStat == 1) && (MenuLimiter(ArrMaterialienPices(), tmpInt) == 1)) {
+			if ((tmpStrinStat == 1) && (MenuLimiter(ArrMaterialPices(), tmpInt) == 1)) {
 				material = tmpInt;
 
 				switch (MainMenuChoose) {
@@ -133,13 +133,10 @@ int main()
 				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
 				// Rückfrage ob Eingabe OK & Möglichkeit zu Navigieren
-				/*
 				InputOK();												
 				GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 				if (tmpStrinStat == 5)
-					step = step + goTo(tmpChar, 2);
-				*/
-				
+					step = step + goTo(tmpChar, 2);		
 
 			} while (false || (1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nuter sagt: nicht OK
 			
@@ -152,7 +149,7 @@ int main()
 		// Berechnung & Ausgabe für Hauptmenüpunkt 1
 		// *****************************************
 		case 5:	
-			printResult(CalcResistorR20RTh(ActTempr, material));
+			printResult(CalcResistorR20RTh(ActTempr, material), 0, 0, ActTempr, MainMenuChoose, material);
 			step = 1;					// Schrittziel: Hauptmenü
 
 			break;
@@ -161,7 +158,7 @@ int main()
 		// Berechnung & Ausgabe für Hauptmenüpunkt 2
 		// *****************************************
 		case 6:
-			printResult(CalcResistorWireRTh(ActLeiterLaenge, ActLeiterQuerschnitt, ActTempr, material));
+			printResult(CalcResistorWireRTh(ActLeiterLaenge, ActLeiterQuerschnitt, ActTempr, material), ActLeiterLaenge ,ActLeiterQuerschnitt , ActTempr, MainMenuChoose, material);
 			step = 1;					// Schrittziel: Hauptmenü
 
 			break;

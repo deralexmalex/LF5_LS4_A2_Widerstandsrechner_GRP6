@@ -1,7 +1,11 @@
-// material.h
-#pragma once
+#ifndef MATERIAL_H
+#define MATERIAL_H
 
-//const char* NameOfMaterial[];
+#include <string>
+
 double MaterialSpez(int Material, int Konstante);
 void ArrMaterialien();
-int ArrMaterialienPices();
+int ArrMaterialPices();
+std::string ArrMaterialString(int pointer);
+
+#endif // !MATERIAL_H

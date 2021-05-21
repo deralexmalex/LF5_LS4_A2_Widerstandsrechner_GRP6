@@ -18,6 +18,9 @@ using namespace std;		// Setze Standard Bibliothek
 //=================================================================================================================//
 
 
+
+
+
 // Ausgebe Funktionen
 // ==================
 
@@ -33,8 +36,8 @@ void HelloUserHead()
 
 void menMainMenu()
 {
-	cout << " 1 | RTh eines genormten Widerstandes (R20) berechnen" << endl;
-	cout << " 2 | RTh einer Leitung berchenen" << endl;
+	cout << " 1 | Temperaturabhängigen Widerstands (RTh) eines Materials berechnen" << endl;
+	cout << " 2 | Temperaturabhängigen Widerstands (RTh) einer Leitung berchenen" << endl;
 }
 
 void menPickMaterial()
@@ -44,17 +47,27 @@ void menPickMaterial()
 							// (aufgrund von Parameterübergabe Problemen)
 }
 
-void printResult(double result)
+
+void printResult(double result, double laenge, double querschnitt, double temperatur , int MenuPointer, int MaterialPointer)
 {
-	cout << "\n\nDas Ergebnis der Rechnung lautet: " << result << " Ohm." << endl <<endl;
+	HelloUserHead();
+	cout << "Ergebnis des Temperaturabhängigen Wiederstandes";
+	if (MenuPointer == 2)
+	{
+		cout << " einer Leitung" << endl;
+		cout << "mit der Länge:       " << laenge << " m" <<endl;
+		cout << "mit dem Querschnitt: " << querschnitt << " mm2";
+	}
+
+	cout << "\nfür das Material:    " << ArrMaterialString(MaterialPointer) << endl;
+	cout << "bei der Temperatur:  " << temperatur << " °C"<<endl;
+	cout << "lautet:              " << result << " Ohm" << endl << endl;
 	system("pause");
 }
 
 void InputOK()
 {
-	cout << "\n\nEingabe übernehmen oder widerrufen?" << endl;
-	cout << "*                '1' - Weiter" << endl;
-	cout << "* 'Jede andere Zahl' - Wiederufen" << endl;
+	cout << "\n'1' -> Weiter    ||     'beliebige Zahl' -> Eingaben Wiederufen" << endl;
 }
 
 

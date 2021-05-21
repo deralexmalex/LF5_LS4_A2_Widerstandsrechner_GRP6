@@ -45,7 +45,7 @@ double MaterialSpez(int Konstante, int Material)
 // ---------------------------
 const char* NameOfMaterial[] = { "Silber", "Kupfer", "Gold", "Aluminium", "Wolfram", "Zinn" };
 
-int ArrMaterialienPices()
+int ArrMaterialPices()
 {
     int counter = 0;
     for (counter = 0; NameOfMaterial[counter] != NULL; counter++); // Abzählen wieviele Elemente im Array sind
@@ -55,7 +55,7 @@ int ArrMaterialienPices()
 void ArrMaterialien()
 {
     // Die Namen der Elemente auflisten (wird hier ausgeführt, d Übergabe des Arrays an HMI zu aufwendig)
-    for (int i = 0; i < ArrMaterialienPices(); i++)
+    for (int i = 0; i < ArrMaterialPices(); i++)
     {
         cout << setfill(' ');
         cout << setw(2) << i + 1;
@@ -63,3 +63,7 @@ void ArrMaterialien()
     }
 }
 
+string ArrMaterialString(int pointer)
+{
+    return NameOfMaterial[pointer - 1];
+}

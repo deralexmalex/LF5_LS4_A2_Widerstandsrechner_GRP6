@@ -7,7 +7,7 @@
 void HelloUserHead();
 void menMainMenu();
 void menPickMaterial();
-void printResult(double result);
+void printResult(double result, double laenge, double querschnitt, double temperatur, int MenuPointer, int MaterialPointer);
 void InputOK();
 
 
