@@ -80,7 +80,7 @@ int main()
 			GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 
 			// Auswertung Menüauswahl
-			if ((tmpStrinStat == 1) && (MenuLimiter(4, tmpInt) == 1)) {
+			if ((tmpStrinStat == 1) && (MenuLimiter(ArrMaterialienPices(), tmpInt) == 1)) {
 				material = tmpInt;
 
 				switch (MainMenuChoose) {

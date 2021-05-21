@@ -17,10 +17,10 @@ using namespace std;
 
 // Werte Speicher & Auswertung
 // ---------------------------
-double SpecificResistanceOfMaterial[4] = { 0.0165, 0.0178, 0.023, 0.0286 };
-double ElectricalConductivityOfMaterial[4] = { 60.6, 56.2, 43.5, 35.0 };
-double TemperatureCoefficientA[4] = { 0.0038, 0.0039, 0.0039, 0.0037 };
-double TemperatureCoefficientB[4] = { 0.7, 0.6, 0.5, 1.3 };
+double SpecificResistanceOfMaterial[6] = { 0.0165, 0.0178, 0.023, 0.0286, 0.055, 0.12 };
+double ElectricalConductivityOfMaterial[6] = { 60.6, 56.2, 43.5, 35.0, 18.2, 8.3 };
+double TemperatureCoefficientA[6] = { 0.0038, 0.0039, 0.0039, 0.0037, 0.0048, 0.0042 };
+double TemperatureCoefficientB[6] = { 0.7, 0.6, 0.5, 1.3, 18.2, 8.3 };
 
 double MaterialSpez(int Konstante, int Material)
 {
@@ -41,24 +41,25 @@ double MaterialSpez(int Konstante, int Material)
     }
 }
 
+// Titel Speicher & Auswertung
+// ---------------------------
+const char* NameOfMaterial[] = { "Silber", "Kupfer", "Gold", "Aluminium", "Wolfram", "Zinn" };
 
-// Materialnamen Stringspeicher & Auswertung / Ausgabe
-// ---------------------------------------------------
-const char* NameOfMaterial[] = { "Silber", "Kupfer", "Gold", "Aluminium" };
-
-int ArrMaterialien()
+int ArrMaterialienPices()
 {
-    int counter, i;
-
+    int counter = 0;
     for (counter = 0; NameOfMaterial[counter] != NULL; counter++); // Abzählen wieviele Elemente im Array sind
+    return counter;
+}
 
+void ArrMaterialien()
+{
     // Die Namen der Elemente auflisten (wird hier ausgeführt, d Übergabe des Arrays an HMI zu aufwendig)
-    for (i = 0; i < counter; i++)
+    for (int i = 0; i < ArrMaterialienPices(); i++)
     {
         cout << setfill(' ');
         cout << setw(2) << i + 1;
         cout << " | " << NameOfMaterial[i] << endl;
     }
-    return counter;
 }
 

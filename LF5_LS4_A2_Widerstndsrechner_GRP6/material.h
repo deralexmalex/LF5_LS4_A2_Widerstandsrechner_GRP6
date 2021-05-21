@@ -3,4 +3,5 @@
 
 //const char* NameOfMaterial[];
 double MaterialSpez(int Material, int Konstante);
-int ArrMaterialien(void);
+void ArrMaterialien();
+int ArrMaterialienPices();
