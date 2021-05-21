@@ -33,16 +33,16 @@ int main()
 	locale::global(locale("German_germany"));
 
 	// Variablendeklaration
-	int tmpStrinStat;
-	int tmpInt;
-	double tmpDdouble;
-	char tmpChar;
+	int tmpStrinStat;			// Tempoär zu verwendender UserInput Status
+	int tmpInt;					// Tempoär zu verwendender UserInput int
+	char tmpChar;				// Tempoär zu verwendender UserInput char
 
+	// Wertespeicher für Berechnungen
 	double ActR20 = 0, ActTempr = 0, ActLeiterLaenge = 0, ActLeiterQuerschnitt = 0;
 
-	int step = 1;
-	int material = 0;
-	int MainMenuChoose = 0;
+	int step = 1;				// Merker: aktueller Schritt
+	int material = 0;			// Merker: Materialauswahl
+	int MainMenuChoose = 0;		// Merker: Hauptmenüauswahl
 	
 	// Programm
 	do {
