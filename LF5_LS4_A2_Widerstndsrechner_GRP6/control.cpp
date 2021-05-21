@@ -94,7 +94,8 @@ int main()
 		// ***********************************
 		case 3:
 			do {
-				// Lese Werte von Benutzer ein					
+				// Lese Werte von Benutzer ein	
+				HelloUserHead();
 				ActTempr = WantedParameter("die Umgebungstemperatur in [°C]", 0);
 
 				// Rückfrage ob Eingabe OK & Möglichkeit zu Navigieren

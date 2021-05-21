@@ -52,8 +52,12 @@ void menPickMaterial()
 {
 	HelloUserHead();
 	cout << "Bitte eines der folgenden Materialien wählen: " << endl;
-	ArrMaterialien();		// Array wird in material.cpp ausgewertet und ausgegeben
-							// (aufgrund von Parameterübergabe Problemen)
+	for (int i = 1; i <= ArrMaterialPices(); i++)
+	{
+		cout << setfill(' ');
+		cout << setw(2) << i;
+		cout << " | " << ArrMaterialString(i) << endl;
+	}
 }
 
 

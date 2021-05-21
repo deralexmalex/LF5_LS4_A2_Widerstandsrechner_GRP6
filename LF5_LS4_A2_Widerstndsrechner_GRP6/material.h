@@ -4,7 +4,6 @@
 #include <string>
 
 double MaterialSpez(int Material, int Konstante);
-void ArrMaterialien();
 int ArrMaterialPices();
 std::string ArrMaterialString(int pointer);
 

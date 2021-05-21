@@ -52,17 +52,6 @@ int ArrMaterialPices()
     return counter;
 }
 
-void ArrMaterialien()
-{
-    // Die Namen der Elemente auflisten (wird hier ausgeführt, da Übergabe des Arrays an HMI zu aufwändig)
-    for (int i = 0; i < ArrMaterialPices(); i++)
-    {
-        cout << setfill(' ');
-        cout << setw(2) << i + 1;
-        cout << " | " << NameOfMaterial[i] << endl;
-    }
-}
-
 string ArrMaterialString(int pointer)
 {
     return NameOfMaterial[pointer - 1];
