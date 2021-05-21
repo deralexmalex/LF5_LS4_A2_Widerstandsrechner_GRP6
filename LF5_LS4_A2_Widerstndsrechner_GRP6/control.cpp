@@ -114,9 +114,6 @@ int main()
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 1);
 
-//				if ((1 != tmpInt) && (5 != tmpStrinStat))
-//					HelloUserHead();
-
 			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nutzer sagt: nicht OK
 			
 			// Auswertung Navi
@@ -141,9 +138,6 @@ int main()
 				GetNavStringFromUser(tmpStrinStat, tmpInt, tmpChar);
 				if (tmpStrinStat == 5)
 					step = step + goTo(tmpChar, 2);
-
-//				if ((1 != tmpInt) && (5 != tmpStrinStat))
-//					HelloUserHead();
 
 			} while ((1 != tmpInt) && (5 != tmpStrinStat));	// Widerhole Eingabe wenn Nuter sagt: nicht OK
 			
